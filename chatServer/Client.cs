@@ -22,7 +22,7 @@ namespace chatServer
             Name = packetReader.ReadMessage();
 
             Console.WriteLine($"{DateTime.Now} {Name} has connected");
-
+            
             Task.Run(()=> Process() );
         }
         void Process()

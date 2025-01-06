@@ -17,13 +17,13 @@ namespace chatClient.Net
         {
             client = new TcpClient();  
         }
-        public void ConnectToServer(string Username)
+        public void ConnectToServer(string Username, string IP)
         {
             if (client.Connected)
             {
                 return;
             }
-            client.Connect("127.0.0.1", 666);
+            client.Connect(IP, 666);
             PacketReader = new PacketReader(client.GetStream());
 
             if (!string.IsNullOrEmpty(Username)) 

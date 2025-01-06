@@ -2,7 +2,6 @@
 using chatServer.Net.IO;
 using System.Net;
 using System.Net.Sockets;
-
 namespace ChatServer
 {
     class Program
@@ -11,10 +10,12 @@ namespace ChatServer
         static TcpListener listener;
         static void Main(string[] args)
         {
+            Console.Write("Give IP: ");
+            string ip = Console.ReadLine();
             users = new List<Client>();
-            listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 666);
+            listener = new TcpListener(IPAddress.Parse(ip), 666);
             listener.Start();
-
+            Console.WriteLine("\nserver started");
             while (true)
             {
                 var client = new Client(listener.AcceptTcpClient());

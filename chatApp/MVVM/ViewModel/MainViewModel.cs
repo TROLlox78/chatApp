@@ -16,6 +16,7 @@ namespace chatClient.MVVM.ViewModel
         private Server server;
         public string Username { get; set; }
         public string Message { get; set; }
+        public string IP  { get; set; }
         public MainViewModel()
         {
             users = new ObservableCollection<UserModel>();
@@ -24,7 +25,7 @@ namespace chatClient.MVVM.ViewModel
             server.connectedEvent += userConnected;
             server.newMessageEvent += messageRecieved;
             server.userDisconnectEvent += userDisconnected;
-            ConnectToServerCommand = new RelayCommand(o=>server.ConnectToServer(Username), o=> !string.IsNullOrEmpty(Username));
+            ConnectToServerCommand = new RelayCommand(o=>server.ConnectToServer(Username, IP), o=> !string.IsNullOrEmpty(Username)&& !string.IsNullOrEmpty(IP));
             SendMessageCommand = new RelayCommand(o=>server.SendMessageToServer(Message), o=> !string.IsNullOrEmpty(Message));
         }
 
@@ -35,7 +36,7 @@ namespace chatClient.MVVM.ViewModel
                 var DcUser = users.Where(user => user.UID == msg).FirstOrDefault(); 
                 if (DcUser == null)
                 {
-                    throw new Exception($"DC: {msg} ");
+                    throw new Exception($"Did not find user UUID: {msg} ");
                 }
                 users.Remove(DcUser);
             });
@@ -44,10 +45,7 @@ namespace chatClient.MVVM.ViewModel
         private void messageRecieved()
         {
             var msg = server.PacketReader.ReadMessage();
-            if (msg.Length > 40)
-            {
-                throw new Exception($"got: {msg} ");
-            }
+
             Application.Current.Dispatcher.Invoke(() => messages.Add(msg));
         }
 
