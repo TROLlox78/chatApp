@@ -54,6 +54,7 @@ Unfortunately the client uses WPF which is a Windows exclusive GUI 😫. Therefo
 
 
 ## Usage
-
+Launch as many clients as you please and connect by typing in a name and the IP of the server. If you port forward port 666 you can even connect over the internet!
+<img width="1519" height="960" alt="image" src="https://github.com/user-attachments/assets/206c9d26-fab6-42e0-996d-26b4b28771bc" />
 
 
