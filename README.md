@@ -4,7 +4,7 @@ This is a chat application prototype presented as a PUT (Telephone services prog
 
 ## Overview
 
-The application opens port 666 for communication.
+The application opens port 666 for communication. It's compatible with .NET 6/8. and was written using Visual Studio 2022.
 
 #### Server
 The *server* starts a `TCPListener` and runs in an infinite while loop waiting for TCP handshakes from clients. When a new client establishes a session, the *server* creates a `Client` object. The `Client` object creates a `Task` (on a new thread) and begins running an infinite loop waiting for messages from the client from the opened network stream. In addition each `Client` gets saved to a `List` allowing for broadcasting of messages by the server.
